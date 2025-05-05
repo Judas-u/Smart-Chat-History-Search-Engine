@@ -1,1 +1,1 @@
-# Smart-Chat-History-Search-Engine
+💬 Smart Chat History Search Engine is a sleek, JavaScript-powered tool that lets users instantly search through large volumes of chat history with ease. Powered by an efficient 🔁 inverted index, it enables real-time, keyword-based search and ranks messages based on relevance — all within your browser.
