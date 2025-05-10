@@ -20,12 +20,27 @@
     body {
         background-color: var(--bg-light);
         color: var(--text-dark);
-        line-height: 1.6;
+        line-height: 2.6;
+        background-color: #b89af2;
         
     }
     .search-header{
         background: linear-gradient(150deg, var(--primary-color), var(--secondary-color));
-        color: white
+        color: white;
+        padding: 3rem ;
+        margin-bottom: 5rem;
+        position: relative;
+    }
+    .search-header::after {
+      content: '';
+      position: absolute;
+      bottom: -50px;
+      left: 0;
+      right: 0;
+      height: 100px;
+      background: var(--bg-light);
+      transform: skewY(-2deg);
+      z-index: 1;
     }
 </style>
 
@@ -35,32 +50,32 @@
     <div class="d-flex flex-column min-vh-100">
 
         <header class="search-header">
-            <div class="container search-container">
-               <div class="text-center ">
-                <i class="bi bi-chat-square-fill fs-1" style="color:rgb(213, 213, 243)"></i>
-                <h1>Chat History</h1>
-                <p class="lead ">Find any message in your conversation history instantly</p>
+            <div class="search-container">
+               <div class="text-center mb-4 mt-5 ">
+                <h1>
+                    <i class="bi bi-chat-square-text-fill fs-1" style="color:rgb(213, 213, 243);"></i>
+                Chat History Search</h1>
+                <p class="lead " style="opacity: 0.9;">Find any message in your conversation history instantly</p>
                </div>
             </div>
         </header>
 
-        <main>
-            <div>
+        <main class="flex-fill container my-4">
+            <div class="">
 
             <!-- Search Engine-->
-            <div>
+            <div class="col-12">
                 <div>
                     <div>
                         <div>
-                            <div>
-                                <span>
-
-                                </span>
-                                <input type="text">
-                                <button>
-
-                                </button>
-                            </div>
+                            <span>
+                                <i></i>
+                            </span>
+                            <input type="text" id="searchInput" class="form-control border-0" placeholder="Search for messages..."  >
+                            <button id="searchButton" class="btn btn-warning text-white">
+                                Search <i class="bi bi-arrow-right ms-2"></i>
+                            </button>
+                        </div>    
                             <div>
                                 <span>
 
@@ -68,9 +83,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
+             </div>
         </main>
 
     </div>
