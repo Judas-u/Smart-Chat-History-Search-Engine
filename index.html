@@ -65,6 +65,9 @@
         border: none;
         padding: 1.25rem ;
     }
+    .highlight {
+        background-color: #f59e0b;
+    }
 </style>
 
 </head>
@@ -78,7 +81,7 @@
                 <h1 class="display-4 fw-semibold mb-4" >
                     <i class="bi bi-chat-square-text-fill fs-100" style="color:rgb(213, 213, 243);"></i>
                 Chat History Search</h1>
-                <p class="lead" style="opacity: 0.9;">Find any message in your conversation history instantly</p>
+                <p class="lead" style="opacity: 0.7;">Find any message in your conversation history instantly</p>
                </div>
             </div>
         </header>
@@ -168,103 +171,169 @@
 
     <script type="text/javascript">
         // Sample data with more details
-    const messages = [
-      { 
-        id: 1,
-        text: "Hey, how are you doing today?", 
-        sender: "Hitendra Kumar Dewangan", 
-        time: "10:30 AM", 
-        date: "Today",
-        avatar: "HD"
-      },
-      { 
-        id: 2,
-        text: "Adishwar, can you send me the report by EOD?", 
-        sender: "Rohit Kumar Sah", 
-        time: "Yesterday", 
-        date: "2:45 PM",
-        avatar: "RS"
-      },
-      { 
-        id: 3,
-        text: "I'm working on the chat search engine project. The UI is coming along nicely!", 
-        sender: "You", 
-        time: "Yesterday", 
-        date: "11:20 AM",
-        avatar: "ME",
-        isYou: true
-      },
-      { 
-        id: 4,
-        text: "Can you send me the latest chat history file? I need it for testing.", 
-        sender: "Ankit Kumar", 
-        time: "May 10", 
-        date: "4:15 PM",
-        avatar: "AK"
-      },
-      { 
-        id: 5,
-        text: "Don't forget the team meeting at 3 PM in Conference Room B.", 
-        sender: "Sandeep Kumar", 
-        time: "May 9", 
-        date: "9:00 AM",
-        avatar: "SK"
-      },
-      { 
-        id: 6,
-        text: "Let's catch up over a call later! I have some ideas to discuss.", 
-        sender: "Rayyan Hussain", 
-        time: "May 8", 
-        date: "5:30 PM",
-        avatar: "RH"
-      },
-      { 
-        id: 7,
-        text: "The weather today is really nice! Perfect for a lunch outside.", 
-        sender: "Ankit Kumar", 
-        time: "May 8", 
-        date: "12:15 PM",
-        avatar: "AK"
-      },
-      { 
-        id: 8,
-        text: "Did you check out the new movie that released last weekend?", 
-        sender: "Anuj Kumar", 
-        time: "May 7", 
-        date: "7:45 PM",
-        avatar: "AK"
-      },
-      { 
-        id: 9,
-        text: "Working on the inverted index implementation now. Should improve search performance significantly.", 
-        sender: "You", 
-        time: "May 6", 
-        date: "3:10 PM",
-        avatar: "ME",
-        isYou: true
-      },
-      { 
-        id: 10,
-        text: "Let's meet at the cafeteria in 10 mins. Need to discuss the project timeline.", 
-        sender: "Raj Kumar", 
-        time: "May 5", 
-        date: "1:50 PM",
-        avatar: "RK"
-      },
-      { 
-        id: 11,
-        text: "Search functionality is almost complete! Just need to polish the UI.", 
-        sender: "You", 
-        time: "May 4", 
-        date: "6:30 PM",
-        avatar: "ME",
-        isYou: true
-      }
-    ];
+        const messages = [
+        { 
+            id: 1,
+            text: "Hey, how are you doing today?", 
+            sender: "Hitendra Kumar Dewangan", 
+            time: "10:30 AM", 
+            date: "Today",
+            avatar: "HD"
+        },
+        { 
+            id: 2,
+            text: "Adishwar, can you send me the report by EOD?", 
+            sender: "Rohit Kumar Sah", 
+            time: "Yesterday", 
+            date: "2:45 PM",
+            avatar: "RS"
+        },
+        { 
+            id: 3,
+            text: "I'm working on the chat search engine project. The UI is coming along nicely!", 
+            sender: "You", 
+            time: "Yesterday", 
+            date: "11:20 AM",
+            avatar: "ME",
+            isYou: true
+        },
+        { 
+            id: 4,
+            text: "Can you send me the latest chat history file? I need it for testing.", 
+            sender: "Ankit Kumar", 
+            time: "May 10", 
+            date: "4:15 PM",
+            avatar: "AK"
+        },
+        { 
+            id: 5,
+            text: "Don't forget the team meeting at 3 PM in Conference Room B.", 
+            sender: "Sandeep Kumar", 
+            time: "May 9", 
+            date: "9:00 AM",
+            avatar: "SK"
+        },
+        { 
+            id: 6,
+            text: "Let's catch up over a call later! I have some ideas to discuss.", 
+            sender: "Rayyan Hussain", 
+            time: "May 8", 
+            date: "5:30 PM",
+            avatar: "RH"
+        },
+        { 
+            id: 7,
+            text: "The weather today is really nice! Perfect for a lunch outside.", 
+            sender: "Ankit Kumar", 
+            time: "May 8", 
+            date: "12:15 PM",
+            avatar: "AK"
+        },
+        { 
+            id: 8,
+            text: "Did you check out the new movie that released last weekend?", 
+            sender: "Anuj Kumar", 
+            time: "May 7", 
+            date: "7:45 PM",
+            avatar: "AK"
+        },
+        { 
+            id: 9,
+            text: "Working on the inverted index implementation now. Should improve search performance significantly.", 
+            sender: "You", 
+            time: "May 6", 
+            date: "3:10 PM",
+            avatar: "ME",
+            isYou: true
+        },
+        { 
+            id: 10,
+            text: "Let's meet at the cafeteria in 10 mins. Need to discuss the project timeline.", 
+            sender: "Raj Kumar", 
+            time: "May 5", 
+            date: "1:50 PM",
+            avatar: "RK"
+        },
+        { 
+            id: 11,
+            text: "Search functionality is almost complete! Just need to polish the UI.", 
+            sender: "You", 
+            time: "May 4", 
+            date: "6:30 PM",
+            avatar: "ME",
+            isYou: true
+        }
+        ];
 
-    function normalText(text) {
-        return text.toLowerCase();
+        function normalText(text) {
+            return text.toLowerCase();
+        }
+
+        function highlightMatch(message, query){
+            if (!query) return message;
+            const regex =  new Regex(` ${query.replace(/[.*+?^${}()[\]\\]/g, '\\$&')}`, 'g');
+            return message.replace(regex, '<span class="highlight">$1</span>');
+        }
+
+        function handleSearch() {
+            const query = normalText(document.getElementById('searchInput').value.trim());
+            const results =  document.getElementById('results');
+            const count = document.getElementById('resultsCount');
+
+            // Add loading animation________
+            results.innerHTML = `
+                <div class=" py-y text-center">
+                    <div class="spinner-border text-primary mb-3" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="">Serching Messages....</p>
+                </div>        
+            `;
+            // Seearch Delay for better UX______
+            setTimeout(() => {
+                if(!query) {
+                    count.innerHTML = '0 results';
+                    results.innerHTML = `
+                    <div class="text-center no-results mt-5 pt-4">
+                        <i class="bi bi bi-search-heart" ></i>
+                        <p class="mt-3 text-muted">Enter a search term to find messages</p>
+                    </div>
+                    `;
+                    return;
+                }
+
+                const matches = messages.filter(msg => normalize(msg.text).includes(querry));
+                count.innerHTML = `${matches.length} result ${matches.length !== 1 ? 's' : ''}`;
+
+                if (matches.length === 0) {
+                    results.innerHTML = `
+                        <div class="text-center no-results mt-5 pt-4 animate__animated animate__fadeIn">
+                            <i class="bi bi-x-circle"></i>
+                            <h5 class="mt-3">No messages found</h5>
+                            <p class="text-muted">Try different keywords or check your spelling</p>
+                        </div>
+                    `;  //_______________________________________________________________________________________
+                } else {
+                    results.innerHTML = matches.map(msg => `
+                        <div class="message-card animate__animated animate__fadeIn">
+                            <div class="message-meta">
+                                <div class="d-flex align-items-center">
+                                    <div class="user-avatar" style="${msg.isYou ? 'background-color: #e0f2fe; color: #0369a1;' : ''}">
+                                        ${msg.avatar}
+                                     </div>
+                                    <div>
+                                        <strong>${msg.sender}</strong>
+                                        <div class="text-muted small">${msg.date} · ${msg.time}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="message-content">${highlightMatch(msg.text, query)}</div>
+                 </div>
+                `).join('');
+            }
+        }, 600); // Simulated search delay
     }
+    
     
     </script>
 
