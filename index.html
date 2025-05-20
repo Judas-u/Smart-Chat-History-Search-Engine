@@ -13,7 +13,7 @@
     <!-- Animate CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
-<style type="text/css">
+<!-- <style type="text/css">
     :root {
         --primary-color: #a37af5;
       --primary-light: #e0e7ff;
@@ -68,7 +68,7 @@
     .highlight {
         background-color: #f59e0b;
     }
-</style>
+</style> -->
 
 </head>
 <body >
@@ -266,76 +266,117 @@
         ];
 
         function normalText(text) {
-            return text.toLowerCase();
-        }
+    return text.toLowerCase();
+}
 
-        function highlightMatch(message, query){
-            if (!query) return message;
-            const regex =  new Regex(` ${query.replace(/[.*+?^${}()[\]\\]/g, '\\$&')}`, 'g');
-            return message.replace(regex, '<span class="highlight">$1</span>');
-        }
+function highlightMatch(message, query) {
+    if (!query) return message;
+    const regex = new RegExp(`(${query.replace(/[.*+?^${}()[\]\\]/g, '\\$&')})`, 'gi');
+    return message.replace(regex, '<span class="highlight">$1</span>');
+}
 
-        function handleSearch() {
-            const query = normalText(document.getElementById('searchInput').value.trim());
-            const results =  document.getElementById('results');
-            const count = document.getElementById('resultsCount');
+function handleSearch() {
+    const query = normalText(document.getElementById('searchInput').value.trim());
+    const results = document.getElementById('results');
+    const count = document.getElementById('resultsCount');
 
-            // Add loading animation________
+    // Add loading animation
+    results.innerHTML = `
+        <div class="py-y text-center">
+            <div class="spinner-border text-primary mb-3" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="">Searching Messages....</p>
+        </div>        
+    `;
+    
+    setTimeout(() => {
+        if (!query) {
+            count.innerHTML = '0 results';
             results.innerHTML = `
-                <div class=" py-y text-center">
-                    <div class="spinner-border text-primary mb-3" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                    <p class="">Serching Messages....</p>
-                </div>        
+            <div class="text-center no-results mt-5 pt-4">
+                <i class="bi bi-search-heart"></i>
+                <p class="mt-3 text-muted">Enter a search term to find messages</p>
+            </div>
             `;
-            // Seearch Delay for better UX______
-            setTimeout(() => {
-                if(!query) {
-                    count.innerHTML = '0 results';
-                    results.innerHTML = `
-                    <div class="text-center no-results mt-5 pt-4">
-                        <i class="bi bi bi-search-heart" ></i>
-                        <p class="mt-3 text-muted">Enter a search term to find messages</p>
-                    </div>
-                    `;
-                    return;
-                }
+            return;
+        }
 
-                const matches = messages.filter(msg => normalize(msg.text).includes(querry));
-                count.innerHTML = `${matches.length} result ${matches.length !== 1 ? 's' : ''}`;
+        const matches = messages.filter(msg => normalText(msg.text).includes(query));
+        count.innerHTML = `${matches.length} result${matches.length !== 1 ? 's' : ''}`;
 
-                if (matches.length === 0) {
-                    results.innerHTML = `
-                        <div class="text-center no-results mt-5 pt-4 animate__animated animate__fadeIn">
-                            <i class="bi bi-x-circle"></i>
-                            <h5 class="mt-3">No messages found</h5>
-                            <p class="text-muted">Try different keywords or check your spelling</p>
-                        </div>
-                    `;  //_______________________________________________________________________________________
-                } else {
-                    results.innerHTML = matches.map(msg => `
-                        <div class="message-card animate__animated animate__fadeIn">
-                            <div class="message-meta">
-                                <div class="d-flex align-items-center">
-                                    <div class="user-avatar" style="${msg.isYou ? 'background-color: #e0f2fe; color: #0369a1;' : ''}">
-                                        ${msg.avatar}
-                                     </div>
-                                    <div>
-                                        <strong>${msg.sender}</strong>
-                                        <div class="text-muted small">${msg.date} · ${msg.time}</div>
-                                    </div>
-                                </div>
+        if (matches.length === 0) {
+            results.innerHTML = `
+                <div class="text-center no-results mt-5 pt-4 animate__animated animate__fadeIn">
+                    <i class="bi bi-x-circle"></i>
+                    <h5 class="mt-3">No messages found</h5>
+                    <p class="text-muted">Try different keywords or check your spelling</p>
+                </div>
+            `;
+        } else {
+            results.innerHTML = matches.map(msg => `
+                <div class="message-card animate__animated animate__fadeIn">
+                    <div class="message-meta">
+                        <div class="d-flex align-items-center">
+                            <div class="user-avatar" style="${msg.isYou ? 'background-color: #e0f2fe; color: #0369a1;' : ''}">
+                                ${msg.avatar}
+                             </div>
+                            <div>
+                                <strong>${msg.sender}</strong>
+                                <div class="text-muted small">${msg.date} · ${msg.time}</div>
                             </div>
-                        <div class="message-content">${highlightMatch(msg.text, query)}</div>
-                 </div>
-                `).join('');
-            }
-        }, 600); // Simulated search delay
-    }
+                        </div>
+                    </div>
+                    <div class="message-content">${highlightMatch(msg.text, query)}</div>
+                </div>
+            `).join('');
+        }
+    }, 600);
+}
     
+    function renderRecentMessages() {
+        const container = document.getElementById('chatMessages');
+        // Simulate Loading delay
+       setTimeout(() => {
+        container.innerHTML = messages.slice(-8).reverse().map(msg => `
+        <div class="message-card px-3 py-2 mx-2 my-2">
+            <div class="d-flex align-items-center mb-2">
+                <div class="user-avatar" style="${msg.isYou ? 'background-color: #e0f2fe; color: #0369a1;' : ''}">
+                ${msg.avatar}
+            </div>
+            <div class="ms-2">
+                <strong>${msg.sender}</strong>
+                <span class="text-muted small ms-2">${msg.time}</span>
+            </div>
+        </div>
+    <div class="message-content">${msg.text.length > 60 ? msg.text.substring(0, 60) + '...' : msg.text}</div>
+    </div>
+      `).join('');
+    }, 800);
     
-    </script>
+    document.getElementById('messageCount').innerText = messages.length;
+  }
+
+  // Debounce search function
+    let searchTimer;
+        function debounceSearch() {
+            clearTimeout(searchTimer);
+            searchTimer = setTimeout(handleSearch, 500);
+        }
+
+    document.getElementById('searchButton').addEventListener('click', handleSearch);
+    document.getElementById('searchInput').addEventListener('input', debounceSearch);
+    document.getElementById('searchInput').addEventListener('keypress', e => {
+        if (e.key === 'Enter') handleSearch();
+    });
+
+  // Initialize
+    renderRecentMessages();
+  
+  // Focus search input on page load
+    document.getElementById('searchInput').focus();
+    
+</script>
 
 </body>
 </html>
