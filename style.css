@@ -1,0 +1,196 @@
+/* CSS  */  
+
+    :root {
+      --primary-color: #a37af5;
+      --primary-light: #e0e7ff;
+      --secondary-color: #3830ce;
+      --accent-color: #4895ef;
+      --text-dark: #1e293b;
+      --text-light: #64748b;
+      --bg-light: #f8fafc;
+      --bg-card: #ffffff;
+      --highlight-color: #f59e0b;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    .highlight {
+      background-color: rgba(245, 158, 11, 0.2);
+      padding: 0.1rem 0.3rem;
+      border-radius: 4px;
+      font-weight: 600;
+      color: var(--highlight-color);
+      transition: all 0.2s ease;
+    }
+
+    .message-card {
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      background: var(--bg-card);
+      border-left: 4px solid var(--accent-color);
+      border-radius: 0.75rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .message-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border-left-color: var(--secondary-color);
+    }
+
+    .message-meta {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .no-results i {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      color: #cbd5e1;
+    }
+
+    .search-header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 3rem 0;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .search-header::after {
+      content: '';
+      position: absolute;
+      bottom: -50px;
+      left: 0;
+      right: 0;
+      height: 100px;
+      background: var(--bg-light);
+      transform: skewY(-2deg);
+      z-index: 1;
+    }
+
+    .search-container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .search-input-group {
+      max-width: 800px;
+      margin: 0 auto;
+      box-shadow: 0 10px 25px rgba(67, 97, 238, 0.3);
+    }
+
+    .search-input {
+      border: none;
+      padding: 1.25rem;
+      font-size: 1.1rem;
+    }
+
+    .search-input:focus {
+      box-shadow: none;
+      border-color: var(--primary-light);
+    }
+
+    .search-btn {
+      padding: 0 2rem;
+      font-weight: 600;
+      background-color: var(--highlight-color);
+      border: none;
+    }
+
+    .search-btn:hover {
+      background-color: #e67e22;
+    }
+
+    .card {
+      border: none;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      margin-bottom: 1.5rem;
+    }
+
+    .card:hover {
+      box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    }
+
+    .card-header {
+      background-color: var(--bg-card);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      font-weight: 600;
+      padding: 1.25rem 1.5rem;
+      border-radius: 0.75rem 0.75rem 0 0 !important;
+    }
+
+    .badge-count {
+      background-color: var(--primary-light);
+      color: var(--primary-color);
+      font-weight: 600;
+      padding: 0.35rem 0.75rem;
+    }
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: var(--primary-light);
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-right: 0.75rem;
+    }
+
+    .footer {
+      background-color: var(--bg-card);
+      padding: 1.5rem 0;
+      margin-top: 3rem;
+      color: var(--text-light);
+      
+    }
+
+    .floating-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background-color: var(--primary-color);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+      z-index: 100;
+      transition: all 0.3s ease;
+      
+    }
+
+    .floating-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+    }
+
+    @media (max-width: 768px) {
+      .search-header {
+        padding: 2rem 0;
+      }
+      
+      .search-input {
+        padding: 1rem;
+      }
+    }
+
